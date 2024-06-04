@@ -6,6 +6,8 @@ este script fue creado Educacionalmente
 <summary>Ver instalación</summary>
 
 ```bash
+pkg update && upgrade
+pkg install git
 pkg install python
 git clone https://github.com/AlanYTT/StatusServer.git
 cd StatusServer
