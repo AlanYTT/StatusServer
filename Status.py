@@ -1,4 +1,3 @@
-
 import re
 import requests
 
@@ -51,6 +50,10 @@ def resaltar_colores_mensaje(mensaje):
     return mensaje_resaltado
 
 def mostrar_informacion_servidor(informacion):
+    if not informacion.get("online"):
+        print(resaltar_colores_mensaje("§6~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n §cEl Servidor Esta off§6\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"))
+        return
+
     print(resaltar_colores_mensaje("§6~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"))
     print(resaltar_colores_mensaje(f"§aIP numerica:§9 {informacion['ip']}"))
     print(resaltar_colores_mensaje(f"§aPuerto:§9 {informacion['port']}\n"))
@@ -70,12 +73,15 @@ def mostrar_informacion_servidor(informacion):
     print(resaltar_colores_mensaje(f"§9Protocolo:§a {informacion['protocol']}"))
     print(resaltar_colores_mensaje(f"Dominio:§a {informacion['hostname']}"))
     print(resaltar_colores_mensaje(f"§6~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"))
+
 if __name__ == "__main__":
     ip = input(resaltar_colores_mensaje("§eIngrese la dirección IP del servidor: "))
     puerto = input(resaltar_colores_mensaje("§bIngrese el puerto del servidor: "))
     edicion = input(resaltar_colores_mensaje("Ingrese la edición del servidor (java/bedrock): "))
     informacion = obtener_informacion_servidor(ip, puerto, edicion)
-    mostrar_informacion_servidor(informacion)
+    if isinstance(informacion, dict):
+        mostrar_informacion_servidor(informacion)
+    else:
+        print(resaltar_colores_mensaje(f"§c{informacion}"))
 
-print(resaltar_colores_mensaje("§6Créditos a§a alanYTT"))
 print(resaltar_colores_mensaje("§cYouTube: §f@alanYTT"))
